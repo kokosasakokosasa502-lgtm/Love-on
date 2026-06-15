@@ -7,9 +7,6 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet" />
 
-  <!-- ============================================================
-       ✏️  قسم الإعدادات — عدّل هنا بسهولة
-       ============================================================ -->
   <script>
     const CONFIG = {
 
@@ -17,7 +14,7 @@
       password: "love",
 
       /* --- اسم الشخص اللي بتبعتهاله/ها --- */
-      partnerName: "جـيـكـا",
+      partnerName: "❤️جــيــكــا❤️",
 
       /* --- نص صفحة كلمة السر --- */
       lockedTitle:   "جاهزة 🤔",
@@ -44,8 +41,7 @@
         { text: "الرابع",  reply: "بعشقك بجد ❤️"             }
       ],
 
-      /* --- الصور (لو عندك صور حقيقية ضع مساراتها هنا) ---
-           مثال: "photos/photo1.jpg"  أو رابط إنترنت  */
+      /* --- الصور (تم إضافة اسم الصورة هنا لتظهر مباشرة) --- */
       photos: [
         { src: "geka1.jpg", caption: "بحبك يا نورعيني ❤️",               gradient: "linear-gradient(135deg,#f472b6,#fb7185)" },
         { src: "geka2.jpg", caption: "كل سنة واحنا مع بعض ❤️ 😉",        gradient: "linear-gradient(135deg,#a855f7,#6366f1)" },
@@ -60,8 +56,6 @@
       songVolume: 0.5    /* من 0 إلى 1 */
     };
   </script>
-  <!-- ============================================================ -->
-
   <style>
     /* ====== الألوان الأساسية ====== */
     :root {
@@ -313,14 +307,11 @@
 </head>
 <body>
 
-<!-- ===== خلفية القلوب الطايرة ===== -->
 <div id="hearts-bg"></div>
 
-<!-- ===== زر الموسيقى ===== -->
 <button id="music-btn" title="تشغيل/إيقاف الموسيقى">🎵</button>
 <audio id="bg-audio" loop></audio>
 
-<!-- ===== Modal رسالة الحب ===== -->
 <div id="modal-overlay">
   <div id="modal-box" class="glass">
     <div class="modal-icon">💌</div>
@@ -330,9 +321,6 @@
   </div>
 </div>
 
-<!-- ===================================================
-     صفحة 1: التحميل
-     =================================================== -->
 <div class="page active" id="page-loading">
   <div id="loading-ring">
     <svg viewBox="0 0 128 128">
@@ -349,9 +337,6 @@
   </div>
 </div>
 
-<!-- ===================================================
-     صفحة 2: كلمة السر
-     =================================================== -->
 <div class="page" id="page-password">
   <div class="avatar">👤</div>
   <h1 id="locked-title"  style="font-size:28px;font-weight:800;margin-bottom:10px"></h1>
@@ -363,18 +348,13 @@
   </div>
 </div>
 
-<!-- ===================================================
-     صفحة 3: الصفحة الرئيسية
-     =================================================== -->
 <div class="page" id="page-main">
 
-  <!-- الهيدر -->
   <header style="display:flex;flex-direction:column;align-items:center;margin:24px 0 36px">
     <div class="avatar" style="width:68px;height:68px;font-size:30px">💖</div>
     <h2 id="header-name" style="font-size:20px;font-weight:800"></h2>
   </header>
 
-  <!-- العداد -->
   <section>
     <div style="text-align:center;margin-bottom:14px">
       <span class="pill" id="anniversary-label"></span>
@@ -389,7 +369,6 @@
 
   <div class="divider"></div>
 
-  <!-- رسائل الحب -->
   <section>
     <div class="section-title">اقفي هنا شوية متجريش 😄</div>
 
@@ -418,7 +397,6 @@
 
   <div class="divider"></div>
 
-  <!-- الكويز -->
   <section>
     <div class="section-title" id="quiz-title"></div>
     <div class="quiz-grid" id="quiz-grid"></div>
@@ -426,21 +404,16 @@
 
   <div class="divider"></div>
 
-  <!-- الصور -->
   <section>
     <div class="section-title">ذكرياتنا الحلوة</div>
     <div id="photos-container" style="display:flex;flex-direction:column;gap:20px"></div>
   </section>
 
-  <!-- زر الرسالة العائم -->
   <button class="btn-main glass" id="btn-letter" onclick="openModal()">
     <span>💌</span> رسالة ليكي
   </button>
 
-</div><!-- end page-main -->
-
-
-<script>
+</div><script>
 /* ================================================================
    بناء الصفحة من الـ CONFIG
    ================================================================ */
@@ -531,7 +504,7 @@ document.getElementById('modal-msg').textContent         = CONFIG.letterMessage;
   });
 })();
 
-/* --- الصور --- */
+/* --- الصور (تم تعديل هذا الجزء لتظهر الصور كاملة وبحواف دائرية كبيرة) --- */
 (function buildPhotos() {
   const container = document.getElementById('photos-container');
   CONFIG.photos.forEach(photo => {
@@ -539,21 +512,28 @@ document.getElementById('modal-msg').textContent         = CONFIG.letterMessage;
     wrap.className = 'glass';
     wrap.style.padding = '12px';
 
-    const frame = document.createElement('div');
-    frame.className = 'photo-frame';
-
     if (photo.src) {
-      frame.style.backgroundImage = `url('${photo.src}')`;
+      // تم استبدال الفريم القديم بوسام صورة حقيقي ليعرضها كاملة وبأبعادها الأصلية
+      const img = document.createElement('img');
+      img.src = photo.src;
+      img.style.width = '100%';
+      img.style.height = 'auto';
+      img.style.borderRadius = '24px'; // حواف دائرية كبيرة وجذابة هنا
+      img.style.display = 'block';
+      wrap.appendChild(img);
     } else {
+      // المربعات الفارغة الملونة الأخرى تظل كما هي بشكلها الافتراضي المتناسق
+      const frame = document.createElement('div');
+      frame.className = 'photo-frame';
       frame.style.background = photo.gradient;
       frame.innerHTML = `<div class="photo-placeholder-icon">📷</div>`;
+      wrap.appendChild(frame);
     }
 
     const caption = document.createElement('p');
     caption.textContent = photo.caption;
     caption.style.cssText = 'text-align:center;font-weight:600;padding:10px 4px 4px';
 
-    wrap.appendChild(frame);
     wrap.appendChild(caption);
     container.appendChild(wrap);
   });
